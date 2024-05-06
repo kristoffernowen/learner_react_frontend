@@ -1,19 +1,20 @@
-import { useState } from 'react'
 import './App.css'
+import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import RootLayoutPage from "./pages/RootLayoutPage";
+import Home from "./pages/Home";
+import ManageExercisesPage from "./pages/ManageExercisesPage";
+
+const router = createBrowserRouter([
+    {path: "/", element: <RootLayoutPage />, children: [
+            {path: "/", element: <Home /> },
+            {path: "/manage-exercises", element: <ManageExercisesPage /> },
+        ]}
+])
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1>Koffe</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-
-    </>
+    <RouterProvider router={router} />
   )
 }
 
