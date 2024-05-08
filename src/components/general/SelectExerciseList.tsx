@@ -2,12 +2,13 @@ import {useEffect, useState} from "react";
 import ExerciseItem from "./ExerciseItem";
 import {type SelectExercise} from "./ExerciseItem";
 import {get} from "../../utilities/httpService";
+import {urls} from "../../utilities/urls";
 
 
 export default function SelectExerciseList() {
     const [exercises, setExercises] = useState<SelectExercise[]>([]);
 
-    const url: string = 'koffes-learner-api.azurewebsites.net/api/Exercise';
+    const url: string = urls.getExercises;
     useEffect(() => {
         async function getExercises(url: string) {
             try {
