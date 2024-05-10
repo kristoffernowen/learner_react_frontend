@@ -8,7 +8,12 @@ export function useGetDataFor<T>(url: string): [T[], boolean, Error | null] {
     useEffect(() => {
         async  function fetchData() {
             try {
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
                 const data = await response.json();
                 setData(data);
             } catch (error: unknown) {
