@@ -1,0 +1,44 @@
+.exerciseDiv {
+    border: solid 0.1rem darkgray;
+    border-radius: 8px;
+    background-color: lightpink;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    max-width: 30rem;
+    width: 25rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.formLabel {
+    border-radius: 8px;
+}
+
+.formInput {
+    border-radius: 8px;
+    border: solid 0.1rem darkgray;
+}
+.multipleButtonDiv {
+    border: solid 0.1rem darkgray;
+    border-radius: 8px;
+    background-color: lightpink;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    max-width: 30rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.broadButton {
+    width: 98%;
+    margin: 0.3rem;
+}
+
+.sendAnswersDiv {
+    background-color: mediumpurple;
+    border: solid 0.1rem darkgray;
+    border-radius: 8px;
+    padding: 0.3rem;
+    margin: 5rem 0.3rem 0.3rem 0.3rem;
+    max-width: 30rem;
+}
