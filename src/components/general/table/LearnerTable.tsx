@@ -1,6 +1,7 @@
 
 import validateTableDataAndColumns from "../../../functions/validateTableDataAndColumns";
-import {useEffect, useState} from "react";
+import {ReactNode, useEffect, useState} from "react";
+import styles from "./LearnerTable.module.css"
 
 type LearnerTableProps = {
     data: DataWithId[];
@@ -35,11 +36,26 @@ export default function LearnerTable({data, columnNames, buttonFunctions}: Learn
         }
     }, [data, columnNames])
 
+    function htmlTdWithProperStyling(columnName: ColumnName, rowData: DataWithId, columnIndex: number): ReactNode {
+        if(columnName.propName === "givenAnswer"){
+            return <td
+             className={rowData["isCorrect"] ? styles.rightAnswer : styles.wrongAnswer}
+             key={columnIndex}
+            >
+                {rowData[columnName.propName]}
+            </td>
+        } else {
+            return <td>{rowData[columnName.propName]}</td>
+        }
+    }
+
     return (
         <>
             {
                 tableInputIsValid ?
-                    <table>
+                    <table
+                        className={styles.learnerTable}
+                    >
                         <thead>
                         <tr>
                             {columnNames.map((columnName, index) => (
@@ -52,15 +68,19 @@ export default function LearnerTable({data, columnNames, buttonFunctions}: Learn
                         <tbody>
                         {
                             data.map((rowData, rowIndex) => (
-                                <tr key={rowIndex} >
+                                <tr
+                                    key={rowIndex}
+                                >
                                     {
                                         columnNames.map((columnName, columnIndex) => (
-                                            <td key={columnIndex}>{rowData[columnName.propName]}</td>
+                                            htmlTdWithProperStyling(columnName, rowData, columnIndex)
                                         ))
                                     }
                                     {
                                         buttonFunctions.map((buttonFunction)=> (
-                                            <td key={buttonFunction.buttonLabel}>
+                                            <td
+                                                key={buttonFunction.buttonLabel}
+                                            >
                                                 <button
                                                     onClick={() => {
                                                         buttonFunction.tableFunction(rowData.id)
