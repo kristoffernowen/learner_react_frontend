@@ -1,6 +1,5 @@
 import {useParams} from "react-router";
 import {useState} from "react";
-import {Result} from "../components/doExercise/ResultBox";
 import ExerciseForm from "../components/doExercise/ExerciseForm";
 import ResultTable from "../components/doExercise/ResultTable";
 
@@ -36,6 +35,25 @@ export type AnswerPerFact = {
     givenAnswer: string;
 }
 
+export type Result = {
+    perFactObjects: FactObjectResult[];
+}
+
+export type FactObjectResult = {
+    id: string;
+    name: string;
+    perFacts: factResult[];
+}
+
+export type factResult = {
+    id: string;
+    factObjectId: string;
+    givenAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+    factName: string
+}
+
 export default function PracticePage() {
 
     let {id} = useParams();
@@ -44,7 +62,7 @@ export default function PracticePage() {
     const [checkAnswersRequest, setCheckAnswersRequest] = useState<CheckAnswersRequest | undefined>();
     const [result, setResult] = useState<Result | undefined>();
 
-    const content = result === undefined ?
+    const exerciseForm = result === undefined ?
         <ExerciseForm
             id={id}
             factObjectIndex={factObjectIndex}
@@ -61,7 +79,7 @@ export default function PracticePage() {
         <>
             <h1>Öva</h1>
             <p>Skriv in rätt svar per objekt och få dina svar rättade.</p>
-            {content}
+            {exerciseForm}
         </>
     )
 }

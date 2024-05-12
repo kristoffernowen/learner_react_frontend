@@ -87,8 +87,8 @@ export default function ResultTable ({result}: ResultTableProps) {
     }
 
     return <>
-        <p>Du hade {countCorrectAnswer} svar rätt och {countIncorrectAnswer} svar fel.</p>
         <LearnerTable data={tableData} columnNames={columnNames} buttonFunctions={[]} />
+        <p>Du hade {countCorrectAnswer} rätt och {countIncorrectAnswer} fel.</p>
     </>
 
 }
