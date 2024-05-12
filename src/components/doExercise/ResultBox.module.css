@@ -1,0 +1,49 @@
+.factObjectDiv {
+    border: solid 0.1rem darkgray;
+    border-radius: 8px;
+    background-color: lightpink;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    max-width: 30rem;
+}
+
+.fact {
+    background-color: white;
+    border-radius: 8px;
+    padding: 0 0.5rem;
+}
+
+.answerDiv {
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+
+}
+.fact span:nth-child(1) {
+    flex: 1;
+}
+.fact span:nth-child(2) {
+    flex: 2;
+    margin-right: 0.5rem;
+}
+
+.borderRadius {
+    border-radius: 8px;
+}
+
+.grayBorder {
+    border: solid 0.1rem darkgray;
+}
+
+.correctAnswer {
+    background-color: lightgreen;
+    color: darkgreen;
+    border-radius: 8px;
+    padding: 0 0.5rem;
+}
+.inCorrectAnswer {
+    background-color: lightpink;
+    color: red;
+    border-radius: 8px;
+    padding: 0 0.5rem;
+}

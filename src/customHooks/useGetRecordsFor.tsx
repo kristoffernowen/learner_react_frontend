@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-export function useGetDataFor<T>(url: string): [T[], boolean, Error | null] {
+export function useGetRecordsFor<T>(url: string): [T[], boolean, Error | null] {
     const [data, setData] = useState<T[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);

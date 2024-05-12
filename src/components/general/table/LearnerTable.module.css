@@ -1,0 +1,23 @@
+.learnerTable {
+    background-color: lightgray;
+    padding: 0.2rem 1rem;
+    border-radius: 8px;
+    border: solid 0.3rem lightpink;
+}
+.learnerTable tr {
+    border-radius: 8px;
+}
+.learnerTable td, th {
+    padding: 0.1rem 1rem;
+    border-radius: 8px;
+}
+.rightAnswer {
+    background-color: lightgreen;
+}
+.wrongAnswer {
+    background-color: palevioletred;
+}
+
+.plainCell {
+
+}

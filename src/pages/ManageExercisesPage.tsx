@@ -2,7 +2,7 @@ import LearnerTable, {ColumnName} from "../components/general/table/LearnerTable
 import {SelectExercise} from "./Home";
 import {type FunctionForLearnerTable} from "../components/general/table/LearnerTable";
 import {urls} from "../utilities/urls";
-import {useGetDataFor} from "../customHooks/useGetDataFor";
+import {useGetRecordsFor} from "../customHooks/useGetRecordsFor";
 
 const columnNames: ColumnName[] = [{
     columnName: "Namn",
@@ -26,7 +26,7 @@ const buttonFunctions: FunctionForLearnerTable[] = [
 
 export default function ManageExercisesPage() {
 
-    const [exercises, loading, error] = useGetDataFor<SelectExercise>(urls.getExercises);
+    const [exercises, loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
 
     if(loading) return <div>Hämtar övningar...</div>
     if(error) return <div>Det blev ett fel: {error.message}</div>
