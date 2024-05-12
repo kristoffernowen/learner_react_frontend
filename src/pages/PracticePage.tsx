@@ -1,7 +1,8 @@
 import {useParams} from "react-router";
 import {useState} from "react";
-import ResultBox, {Result} from "../components/doExercise/ResultBox";
+import {Result} from "../components/doExercise/ResultBox";
 import ExerciseForm from "../components/doExercise/ExerciseForm";
+import ResultTable from "../components/doExercise/ResultTable";
 
 export type PracticeExercise = {
     name: string;
@@ -52,10 +53,9 @@ export default function PracticePage() {
             setCheckAnswersRequest={setCheckAnswersRequest}
             setResult={setResult}
         /> :
-        <ResultBox
+        <ResultTable
             result={result}
         />
-
 
     return (
         <>

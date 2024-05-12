@@ -36,13 +36,19 @@ export default function Home() {
         }
     ];
 
-    if(loading) return <div>Hämtar övningar...</div>
-    if(error) return <div>Det blev ett fel: {error.message}</div>
+    const loadingMessage = <div>Hämtar övningar...</div>;
+    const errorMessage = <div>Det blev ett fel: {error ? error.message : "no error"}</div>;
 
     return (
         <>
             <h1>Hem</h1>
-            <LearnerTable data={exercises} columnNames={columnNames} buttonFunctions={buttonFunctions}/>
+            {
+                loading ?
+                    loadingMessage:
+                    error ?
+                        errorMessage:
+                        <LearnerTable data={exercises} columnNames={columnNames} buttonFunctions={buttonFunctions}/>
+            }
         </>
     )
 }
