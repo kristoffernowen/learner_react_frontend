@@ -1,0 +1,20 @@
+.borderRadius {
+    border-radius: 8px;
+}
+
+
+.topDiv {
+    border: solid 0.1rem darkgray;
+    border-radius: 8px;
+    background-color: lightpink;
+    padding: 0.3rem;
+    margin: 0.3rem;
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input {
+    border: 1px solid lightgray;
+    border-radius: 8px;
+}

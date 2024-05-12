@@ -1,0 +1,22 @@
+.form {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 10%;
+}
+
+.button {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+.form .leftDiv {
+    margin: 5rem;
+}
+
+.borderRadius {
+    border-radius: 8px;
+}
+
+
+
