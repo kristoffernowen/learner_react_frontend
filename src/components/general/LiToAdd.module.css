@@ -1,0 +1,32 @@
+.liToAdd {
+    text-decoration: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0.2em 0;
+    background-color: lightpink;
+    border-radius: 8px;
+}
+.liToAdd div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.liToAdd p {
+    margin: 0;
+    padding: 0 0.4em;
+}
+
+.liToAdd button {
+    border: solid 1px lightgray;
+    font-size: 0.8rem;
+
+    font-weight: normal;
+    border-radius: 8px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    padding: 0;
+    margin: 0;
+}
