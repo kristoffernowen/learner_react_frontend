@@ -13,8 +13,6 @@ const columnNames: ColumnName[] = [{
     propName: "name"
 }];
 
-
-
 export default function Home() {
 
     const [exercises, loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
