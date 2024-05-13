@@ -23,7 +23,7 @@ export function useGetRecordsFor<T>(url: string): [T[], boolean, Error | null] {
             }
         }
         fetchData();
-    }, [])
+    }, [url])
 
     return [data, loading, error];
 }

@@ -45,7 +45,9 @@ export default function LearnerTable({data, columnNames, buttonFunctions}: Learn
                 {rowData[columnName.propName]}
             </td>
         } else {
-            return <td>{rowData[columnName.propName]}</td>
+            return <td
+                key={columnIndex}
+            >{rowData[columnName.propName]}</td>
         }
     }
 

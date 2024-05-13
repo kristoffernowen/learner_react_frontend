@@ -6,6 +6,7 @@ export default function NavMenu() {
         <div>
             <Link to={"/"}><button>Hem</button></Link>
             <Link to={"/manage-exercises"}><button>Hantera övningar</button></Link>
+            <Link to={"/new-exercise"}><button>Skapa övning</button></Link>
         </div>
     </div>
 }
