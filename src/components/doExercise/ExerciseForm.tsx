@@ -112,7 +112,6 @@ export default function ExerciseForm({
                 }
             });
         }
-        console.log(answers)
     }
 
     function goForward() {
