@@ -23,7 +23,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  margin: 3rem 0;
   display: flex;
   place-items: start;
   min-width: 320px;
@@ -64,5 +64,11 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    margin: 0;
   }
 }

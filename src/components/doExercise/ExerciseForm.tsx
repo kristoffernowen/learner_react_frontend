@@ -135,8 +135,10 @@ export default function ExerciseForm({
     }
 
     return <form onSubmit={handleSubmit}>
-        <strong><p>{answers.name}</p></strong>
-        <em><p>{answers.factObjects[factObjectIndex].name}</p></em>
+        <div className={styles.titleDiv}>
+            <strong><span>{answers.name}: </span></strong>
+            <em><span>{answers.factObjects[factObjectIndex].name}</span></em>
+        </div>
         {
             answers.factObjects[factObjectIndex].facts.map((fact) => <div
                 key={fact.id}

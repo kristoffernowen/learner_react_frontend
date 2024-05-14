@@ -29,17 +29,17 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
 
     return <>
         <p>Namnge övningen.</p>
-        <InputWithLabel
-            label="Namn på övningen:"
-            id="exerciseName"
-            value={modelExercise.name}
-            handleInputChange={handleInputChange}
-        />
-        <button
-            className={styles.nameButton}
-            onClick={() => setStage("factObjectModel")}
-        >
-            Gå vidare
-        </button>
+            <InputWithLabel
+                label="Namn på övningen:"
+                id="exerciseName"
+                value={modelExercise.name}
+                handleInputChange={handleInputChange}
+            />
+            <button
+                className={styles.nameButton}
+                onClick={() => setStage("factObjectModel")}
+            >
+                Gå vidare
+            </button>
     </>
 }

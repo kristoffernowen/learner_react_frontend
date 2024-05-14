@@ -3,12 +3,13 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 export function useGetRecordFor<T>(url:string, initialData: T): [T, Dispatch<SetStateAction<T>>, boolean, Error | null] {
 
     const [data, setData] = useState<T>(initialData);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         async  function fetchData() {
             try {
+                setLoading(true);
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {
