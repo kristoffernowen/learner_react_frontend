@@ -1,4 +1,8 @@
 .nameButton {
-    width: 98%;
+    width: 100%;
     border: 1px solid lightgray;
+    padding: 0.6em 2em;
+    margin: 0;
 }
+
+

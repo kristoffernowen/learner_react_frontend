@@ -2,12 +2,14 @@ import React, {useEffect, useState} from "react";
 
 export function useGetRecordsFor<T>(url: string): [T[], boolean, Error | null] {
     const [data, setData] = useState<T[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         async  function fetchData() {
             try {
+                console.log(url)
+                setLoading(true);
                 const response = await fetch(url, {
                     method: "GET",
                     headers: {

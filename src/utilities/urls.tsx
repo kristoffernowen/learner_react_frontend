@@ -11,3 +11,4 @@ export const urls: UrlCollection = {
     startExercise: "https://koffes-learner-api.azurewebsites.net/api/DoExercise/StartExercise/",
     checkAnswers: "https://koffes-learner-api.azurewebsites.net/api/DoExercise/CheckAnswers"
 }
+

@@ -1,7 +1,12 @@
 .grayBox {
     border: solid 0.1rem darkgray;
     border-radius: 8px;
-    padding: 0.3rem;
-    margin: 0.3rem;
-    max-width: 40em;
+    overflow-wrap: anywhere;
+    margin: 0.3em 0;
+}
+
+@media screen and (min-width: 1200px) {
+    .grayBox {
+        max-width: 15rem;
+    }
 }

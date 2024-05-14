@@ -1,17 +1,24 @@
-.form {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 10%;
-}
-
 .myButton {
     width: 100%;
     border: 1px solid lightgray;
+    margin: 0.3em 0;
 }
 
-
-
-.form .leftDiv {
+.grayBox {
     margin: 5rem;
+    background-color: red;
+}
+
+@media screen and (min-width: 1200px) {
+    .form {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        margin: 0 10%;
+    }
+
+    .form .leftDiv {
+        min-width: 40rem;
+        margin: 5rem;
+    }
 }

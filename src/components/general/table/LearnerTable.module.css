@@ -1,5 +1,5 @@
 .learnerTable {
-    background-color: lightgray;
+    background-color: rgba(238,238,255, 0.4);
     padding: 0.2rem 1rem;
     border-radius: 8px;
     border: solid 0.3rem lightpink;
@@ -15,7 +15,11 @@
     background-color: lightgreen;
 }
 .wrongAnswer {
-    background-color: palevioletred;
+    background-color: #f04360;
+}
+
+.learnerTable button {
+    background-color: lightgray;
 }
 
 .plainCell {

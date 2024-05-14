@@ -115,8 +115,10 @@ export default function ModelForm({
             <button className={styles.myButton} >Lägg till</button>
             <button className={styles.myButton} type="button" onClick={Continue}>Gå vidare</button>
         </div>
-        <GrayBorderedBox>
-            <p>Övningen kommer att innehålla följande fakta:</p>
+        <GrayBorderedBox
+            className={styles.grayBox}
+        >
+            <p>Övningen kommer att innehålla följande fakta per objekt:</p>
             <UlToAdd>
                 {modelFactObject.facts.length > 0 && modelFactObject.facts.map((fact) =>
                     <LiToAdd name={fact.factName} key={fact.factName} removeItem={removeItem} />

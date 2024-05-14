@@ -129,7 +129,11 @@ export default function CreateExerciseForm({
         <h1>RÄTT SVAR</h1>
         <p>Skriv in rätt svar per fakta på alla objekt.</p>
         <form onSubmit={handleSubmit}>
-            <strong><p>{exerciseToCreate?.factObjects[factObjectIndex].name}</p></strong>
+            <div
+                className={styles.titleDiv}
+            >
+                <em><p>{exerciseToCreate?.factObjects[factObjectIndex].name}</p></em>
+            </div>
             {
                 exerciseToCreate?.factObjects[factObjectIndex].facts.map((fact) => <div
                     key={fact.factName}

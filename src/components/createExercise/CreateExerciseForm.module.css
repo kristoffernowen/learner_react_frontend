@@ -3,11 +3,17 @@
     border-radius: 8px;
     background-color: lightpink;
     padding: 0.3rem;
-    margin: 0.3rem;
+    margin: 0.3rem 0;
     max-width: 30rem;
     width: 25rem;
     display: flex;
     justify-content: space-between;
+}
+
+
+.titleDiv {
+    text-align: start;
+    margin-left: 0.6em;
 }
 
 label {
@@ -31,7 +37,9 @@ input {
     border-radius: 8px;
     background-color: lightpink;
     padding: 0.3rem;
-    margin: 0.3rem;
+
+    margin: 0.3rem 0;
+
     max-width: 30rem;
     display: flex;
     justify-content: space-between;

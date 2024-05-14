@@ -10,6 +10,11 @@
     justify-content: space-between;
 }
 
+.titleDiv {
+    text-align: start;
+    margin-left: 0.6em;
+}
+
 .formLabel {
     border-radius: 8px;
 }
