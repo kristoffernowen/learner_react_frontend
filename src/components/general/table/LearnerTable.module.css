@@ -1,3 +1,9 @@
+.container {
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
 .learnerTable {
     background-color: rgba(238,238,255, 0.4);
     padding: 0.2rem 1rem;
