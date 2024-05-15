@@ -15,7 +15,7 @@ const columnNames: ColumnName[] = [{
 
 export default function Home() {
 
-    const [exercises, loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
+    const [exercises, , loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
 
     const navigate = useNavigate();
 
@@ -24,12 +24,6 @@ export default function Home() {
             buttonLabel: "Starta övning",
             tableFunction: function startExercise(id?: string) {
                 navigate(`/practice-page/${id}`)
-            }
-        },
-        {
-            buttonLabel: "Visa detaljer",
-            tableFunction: function showId(id?: string){
-                console.log(id)
             }
         }
     ];

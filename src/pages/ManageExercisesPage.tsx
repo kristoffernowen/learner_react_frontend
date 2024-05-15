@@ -3,30 +3,29 @@ import {SelectExercise} from "./Home";
 import {type FunctionForLearnerTable} from "../components/general/table/LearnerTable";
 import {urls} from "../utilities/urls";
 import {useGetRecordsFor} from "../customHooks/useGetRecordsFor";
-
-const columnNames: ColumnName[] = [{
-    columnName: "Namn",
-    propName: "name"
-}];
-
-const buttonFunctions: FunctionForLearnerTable[] = [
-    {
-        buttonLabel: "säg första",
-        tableFunction: function sayFirst() {
-            console.log("första")
-        }
-    },
-    {
-        buttonLabel: "säg id",
-        tableFunction: function sayId(id?: string){
-            console.log(id)
-        }
-    }
-];
+import {deleteWithFetch} from "../utilities/fetchUtility";
 
 export default function ManageExercisesPage() {
 
-    const [exercises, loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
+    const [exercises, setExercises, loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
+
+    const columnNames: ColumnName[] = [{
+        columnName: "Namn",
+        propName: "name"
+    }];
+
+    const buttonFunctions: FunctionForLearnerTable[] = [
+        {
+            buttonLabel: "Ta bort",
+            tableFunction: async function deleteExercise(id?: string){
+                const responseOk = await deleteWithFetch(urls.deleteExercise, id ? id : "no id");
+                if(responseOk){
+                    const updatedExercises = exercises.filter(x => x.id !== id);
+                    setExercises(updatedExercises);
+                }
+            }
+        }
+    ];
 
     if(loading) return <div>Hämtar övningar...</div>
     if(error) return <div>Det blev ett fel: {error.message}</div>

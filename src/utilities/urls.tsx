@@ -1,14 +1,18 @@
 type UrlCollection = {
     getExercises: string;
     postExercise: string;
+    deleteExercise: string;
     startExercise: string;
     checkAnswers: string;
 }
 
+const baseUrl = "https://koffes-learner-api.azurewebsites.net/api/";
+
 export const urls: UrlCollection = {
-    getExercises: 'https://koffes-learner-api.azurewebsites.net/api/Exercise',
-    postExercise: 'https://koffes-learner-api.azurewebsites.net/api/Exercise',
-    startExercise: "https://koffes-learner-api.azurewebsites.net/api/DoExercise/StartExercise/",
-    checkAnswers: "https://koffes-learner-api.azurewebsites.net/api/DoExercise/CheckAnswers"
+    getExercises: `${baseUrl}Exercise/`,
+    postExercise: `${baseUrl}Exercise/`,
+    deleteExercise: `${baseUrl}Exercise/`,
+    startExercise: `${baseUrl}DoExercise/StartExercise/`,
+    checkAnswers: `${baseUrl}DoExercise/CheckAnswers`
 }
 

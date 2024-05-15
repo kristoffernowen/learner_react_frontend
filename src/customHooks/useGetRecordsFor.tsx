@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 
-export function useGetRecordsFor<T>(url: string): [T[], boolean, Error | null] {
+export function useGetRecordsFor<T>(url: string): [T[], Dispatch<SetStateAction<T[]>>, boolean, Error | null] {
     const [data, setData] = useState<T[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
@@ -27,5 +27,5 @@ export function useGetRecordsFor<T>(url: string): [T[], boolean, Error | null] {
         fetchData();
     }, [url])
 
-    return [data, loading, error];
+    return [data, setData, loading, error];
 }

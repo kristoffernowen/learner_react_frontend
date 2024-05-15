@@ -19,8 +19,14 @@ export type ColumnName = {
     columnName: string;
 }
 
+type SyncFunc = (id?:string) => void;
+
+
+type AsyncFunc = (id?:string) => Promise<string>
+
+
 export type FunctionForLearnerTable = {
-    tableFunction: (id?:string) => void;
+    tableFunction: SyncFunc | AsyncFunc;
     buttonLabel: string;
 }
 
@@ -52,7 +58,9 @@ export default function LearnerTable({data, columnNames, buttonFunctions}: Learn
     }
 
     return (
-        <>
+        <div
+            className={styles.container}
+        >
             {
                 tableInputIsValid ?
                     <table
@@ -102,6 +110,6 @@ export default function LearnerTable({data, columnNames, buttonFunctions}: Learn
                         Det är något fel på tabellen
                     </div>
             }
-        </>
+        </div>
     )
 }
