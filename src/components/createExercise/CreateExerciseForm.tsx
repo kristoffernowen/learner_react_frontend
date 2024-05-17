@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {CreateExercise, CreateFactObject} from "./ModelForm";
 import {useNavigate} from "react-router";
 import styles from "./CreateExerciseForm.module.css";
@@ -57,6 +57,12 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex < exerciseToCreate.factObjects.length - 1) {
             setFactObjectIndex(factObjectIndex + 1);
+            // refocus
+            const input =
+                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
+            if (input) {
+                input.focus();
+            }
         }
     }
 
@@ -125,6 +131,14 @@ export default function CreateExerciseForm({
         return false;
     }
 
+    useEffect(() => {
+        const input =
+            document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+    }, []);
+
     return <div>
         <h1>RÄTT SVAR</h1>
         <p>Skriv in rätt svar per fakta på alla objekt.</p>
@@ -141,11 +155,13 @@ export default function CreateExerciseForm({
                 >
                     <label
                         htmlFor={fact.factName}
+                        /*htmlFor={"rightAnswer"}*/
                     >
                         {fact.factName}
                     </label>
                     <input
                         id={fact.factName}
+                        /*id={"rightAnswer"}*/
                         type="text"
                         value={fact.factValue}
                         onChange={(event) => handleInputChange(event, fact.factName, factObjectIndex)}

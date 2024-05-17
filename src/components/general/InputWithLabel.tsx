@@ -28,7 +28,6 @@ export default function InputWithLabel({
             {label}
         </label>
         <input
-
             {...props}
             className={styles.input}
             id={id}

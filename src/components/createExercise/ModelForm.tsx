@@ -1,5 +1,5 @@
 import InputWithLabel from "../general/InputWithLabel";
-import {ChangeEvent, ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useState} from "react";
+import {ChangeEvent, ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
 import styles from "./ModelForm.module.css"
 import {StageOfCreation} from "../../pages/CreateExercisePage";
 import GrayBorderedBox from "../general/GrayBorderedBox";
@@ -37,6 +37,7 @@ export default function ModelForm({
                                   }: ModelFormProps) {
 
     const [newFact, setNewFact] = useState<string>("");
+
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         setNewFact(event.target.value);
@@ -101,6 +102,13 @@ export default function ModelForm({
         );
     }
 
+    useEffect(() => {
+        const input = document.getElementById("newFact") as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+    }, [modelFactObject]);
+
     return <form
         className={styles.form}
         onSubmit={Add}
@@ -113,7 +121,11 @@ export default function ModelForm({
                 Senare skriver du in vilket värde, eller rätt svar, varje fakta per faktaobjekt ska ha.</p>
             <InputWithLabel label="namn på fakta" id="newFact" value={newFact} handleInputChange={handleInputChange}/>
             <button className={styles.myButton} >Lägg till</button>
-            <button className={styles.myButton} type="button" onClick={Continue}>Gå vidare</button>
+            <button
+                className={styles.myButton}
+                type="button" onClick={Continue}
+                disabled={modelFactObject.facts.length === 0}
+            >Gå vidare</button>
         </div>
         <GrayBorderedBox
             className={styles.grayBox}
