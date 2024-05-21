@@ -18,10 +18,6 @@ export default function Home() {
 
     const [exercises, , loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
 
-    useEffect(() => {
-        console.log(exercises)
-    }, [exercises])
-
     const navigate = useNavigate();
 
     const buttonFunctions: FunctionForLearnerTable[] = [

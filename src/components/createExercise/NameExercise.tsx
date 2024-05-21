@@ -48,6 +48,7 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
 
     return <>
         <p>Namnge övningen.</p>
+
         <div
             className={styles.topDiv}
         >
@@ -74,5 +75,6 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
         >
             Gå vidare
         </button>
+
     </>
 }
