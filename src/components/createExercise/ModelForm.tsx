@@ -1,5 +1,5 @@
 import InputWithLabel from "../general/InputWithLabel";
-import {ChangeEvent, ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useState} from "react";
+import {ChangeEvent, ComponentPropsWithoutRef, Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
 import styles from "./ModelForm.module.css"
 import {StageOfCreation} from "../../pages/CreateExercisePage";
 import GrayBorderedBox from "../general/GrayBorderedBox";
@@ -66,6 +66,13 @@ export default function ModelForm({
         setNewFact("");
     }
 
+    useEffect(() => {
+        const input = document.getElementById("newFact") as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+    }, [modelFactObject]);
+
     function Continue(event: FormEvent) {
         event.preventDefault();
         setModelFactObject(prevState => {
@@ -111,9 +118,25 @@ export default function ModelForm({
         >
             <p>Bygg upp vilka fakta (t ex vikt) som ska ingå i varje faktaobjekt (t ex tiger) i övningen (t ex djur). Lägg till vad faktan ska ha för namn.
                 Senare skriver du in vilket värde, eller rätt svar, varje fakta per faktaobjekt ska ha.</p>
-            <InputWithLabel label="namn på fakta" id="newFact" value={newFact} handleInputChange={handleInputChange}/>
-            <button className={styles.myButton} >Lägg till</button>
-            <button className={styles.myButton} type="button" onClick={Continue}>Gå vidare</button>
+            <InputWithLabel
+                label="namn på fakta"
+                id="newFact"
+                value={newFact}
+                handleInputChange={handleInputChange}
+            />
+            <button
+                className={styles.myButton}
+            >
+                Lägg till
+            </button>
+            <button
+                className={styles.myButton}
+                type="button"
+                onClick={Continue}
+                disabled={modelFactObject.facts.length === 0}
+            >
+                Gå vidare
+            </button>
         </div>
         <GrayBorderedBox
             className={styles.grayBox}

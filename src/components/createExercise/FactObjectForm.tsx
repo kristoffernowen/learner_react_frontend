@@ -1,7 +1,7 @@
 import styles from "./FactObjectForm.module.css"
 import {CreateExercise, CreateFactObject} from "./ModelForm";
 import InputWithLabel from "../general/InputWithLabel";
-import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useState} from "react";
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useState} from "react";
 import {StageOfCreation} from "../../pages/CreateExercisePage";
 import GrayBorderedBox from "../general/GrayBorderedBox";
 import UlToAdd from "../general/UlToAdd";
@@ -56,6 +56,13 @@ export default function FactObjectForm({
         setInput("");
     }
 
+    useEffect(() => {
+        const input = document.getElementById("factObjectName") as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+    }, [modelExercise]);
+
     function removeItem(factNameToRemove: string) {
         setNewExercise((prevState) => {
                 if (prevState !== undefined) {
@@ -98,6 +105,7 @@ export default function FactObjectForm({
                 onClick={() => {
                     setStage("setRightAnswerPerFactObject")
                 }}
+                disabled={modelExercise.factObjects.length === 0}
             >Gå vidare
             </button>
 
