@@ -1,8 +1,7 @@
 import {CreateExercise} from "./ModelForm";
-import {ChangeEvent, Dispatch, SetStateAction} from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useEffect, useRef} from "react";
 import {StageOfCreation} from "../../pages/CreateExercisePage";
 import styles from "./NameExercise.module.css"
-import InputWithLabel from "../general/InputWithLabel";
 
 type NameExerciseProps = {
     modelExercise: CreateExercise;
@@ -11,6 +10,16 @@ type NameExerciseProps = {
 }
 
 export default function NameExercise({modelExercise, setModelExercise, setStage}: NameExerciseProps) {
+
+    const continueButton = useRef<HTMLButtonElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (!inputRef) {
+            return;
+        }
+        inputRef.current!.focus();
+    }, [])
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         setModelExercise(prevState => {
@@ -27,19 +36,45 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
         });
     }
 
+    function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            if (!continueButton.current) {
+                return;
+            }
+            continueButton.current!.focus();
+        }
+    }
+
     return <>
         <p>Namnge övningen.</p>
-            <InputWithLabel
-                label="Namn på övningen:"
-                id="exerciseName"
-                value={modelExercise.name}
-                handleInputChange={handleInputChange}
-            />
-            <button
-                className={styles.nameButton}
-                onClick={() => setStage("factObjectModel")}
+
+        <div
+            className={styles.topDiv}
+        >
+            <label
+                htmlFor="exerciseName"
             >
-                Gå vidare
-            </button>
+                Namn på övningen:
+            </label>
+            <input
+                ref={inputRef}
+                id="exerciseName"
+                type="text"
+                className={styles.input}
+                value={modelExercise.name}
+                onChange={(event) => handleInputChange(event)}
+                onKeyDown={(event) => handleKeyDown(event)}
+            />
+        </div>
+        <button
+            className={styles.nameButton}
+            onClick={() => setStage("factObjectModel")}
+            ref={continueButton}
+            disabled={modelExercise.name.trim() === "" }
+        >
+            Gå vidare
+        </button>
+
     </>
 }
