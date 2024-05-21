@@ -1,5 +1,5 @@
 import {AnswerPerFact, CheckAnswersRequest, PracticeExercise} from "../../pages/PracticePage";
-import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect} from "react";
+import React, {ChangeEvent, Dispatch, FormEvent, SetStateAction, useEffect, useRef, useState} from "react";
 import styles from "./ExerciseForm.module.css";
 
 import {useGetRecordFor} from "../../customHooks/useGetRecordFor";
@@ -34,8 +34,30 @@ export default function ExerciseForm({
             id: ""
         });
 
+    const inputRefs = useRef<HTMLInputElement[]>([]);
+    const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+    const continueButtonRef = useRef<HTMLButtonElement | null>(null);
+
+    const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const nextIndex = index + 1;
+            if (nextIndex < inputRefs.current.length) {
+                inputRefs.current[nextIndex].focus();
+            } else {
+                if (!continueButtonRef.current) {
+                    return;
+                }
+                if(factObjectIndex + 1 === answers?.factObjects.length && submitButtonRef.current){
+                    submitButtonRef.current!.focus();
+                }
+                continueButtonRef.current!.focus();
+            }
+        }
+    };
+
     useEffect(() => {
-        async function post(url: string, body: CheckAnswersRequest){
+        async function post(url: string, body: CheckAnswersRequest) {
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -46,7 +68,8 @@ export default function ExerciseForm({
             const data = await response.json();
             setResult(data);
         }
-        if(checkAnswersRequest !== undefined) {
+
+        if (checkAnswersRequest !== undefined) {
             post(postUrl, checkAnswersRequest)
         }
     }, [checkAnswersRequest])
@@ -68,17 +91,24 @@ export default function ExerciseForm({
         };
     }
 
+    const [factIndex, setFactIndex] = useState(0);
+
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         if (answers !== undefined) {
             const request = mapToCheckAnswersRequest(answers);
-            console.log(request)
             setCheckAnswersRequest(() => {
                 return {
                     id: request.id,
                     answersPerFact: request.answersPerFact
                 }
             });
+        }
+        setFactIndex(prevState => prevState + 1);
+        const input = document.querySelector(`#${answers?.factObjects[factObjectIndex].facts[factIndex].factName}`
+        ) as HTMLInputElement | null;
+        if (input) {
+            input.focus();
         }
     }
 
@@ -102,7 +132,6 @@ export default function ExerciseForm({
                             facts: updatedFacts
                         };
                     }
-
                     return {
                         ...prevState,
                         factObjects: factObjects
@@ -125,9 +154,19 @@ export default function ExerciseForm({
     function goBack() {
         if (answers !== undefined &&
             factObjectIndex !== 0) {
-            setFactObjectIndex(factObjectIndex - 1)
+            setFactObjectIndex(factObjectIndex - 1);
         }
     }
+
+    useEffect(() => {
+        if (answers.factObjects.length === 0) return;
+        const input = document.querySelector(`#${answers.factObjects[factObjectIndex].facts[0].factName}`
+        ) as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+
+    }, [factObjectIndex, answers.factObjects.length])
 
     if (isLoading) {
         return <p>Laddar...</p>
@@ -139,22 +178,24 @@ export default function ExerciseForm({
             <em><span>{answers.factObjects[factObjectIndex].name}</span></em>
         </div>
         {
-            answers.factObjects[factObjectIndex].facts.map((fact) => <div
+            answers.factObjects[factObjectIndex].facts.map((fact, index) => <div
                 key={fact.id}
                 className={styles.exerciseDiv}
             >
                 <label
                     className={styles.formLabel}
-                    htmlFor={fact.id}
+                    htmlFor={fact.factName}
                 >
                     {fact.factName}
                 </label>
                 <input
-                    id={fact.id}
+                    ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
+                    id={fact.factName}
                     type="text"
                     className={styles.formInput}
                     value={fact.factValue}
                     onChange={(event) => handleInputChange(event, fact.id, factObjectIndex)}
+                    onKeyDown={(event) => handleInputKeyDown(event, index)}
                 />
             </div>)
         }
@@ -168,6 +209,7 @@ export default function ExerciseForm({
                 Tillbaka
             </button>
             <button
+                ref={continueButtonRef}
                 type="button"
                 className={styles.broadButton}
                 onClick={goForward}
@@ -181,6 +223,7 @@ export default function ExerciseForm({
             factObjectIndex === answers.factObjects.length - 1 && <div className={styles.sendAnswersDiv}>
                 <button
                     className={styles.broadButton}
+                    ref={submitButtonRef}
                 >
                     Rätta svar
                 </button>

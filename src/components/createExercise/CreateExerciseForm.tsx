@@ -1,4 +1,4 @@
-import {ChangeEvent, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {CreateExercise, CreateFactObject} from "./ModelForm";
 import {useNavigate} from "react-router";
 import styles from "./CreateExerciseForm.module.css";
@@ -52,11 +52,46 @@ export default function CreateExerciseForm({
         }
     }
 
+    const inputRefs = useRef<HTMLInputElement[]>([]);
+    const submitButtonRef = useRef<HTMLButtonElement | null>(null);
+    const continueButtonRef = useRef<HTMLButtonElement | null>(null);
+
+    const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number, factObjectIndex: number) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const nextIndex = index + 1;
+            if (nextIndex < inputRefs.current.length) {
+                inputRefs.current[nextIndex].focus();
+            } else {
+                if (!continueButtonRef.current) {
+                    return;
+                }
+                if(factObjectIndex + 1 === exerciseToCreate?.factObjects.length && submitButtonRef.current){
+                    submitButtonRef.current!.focus();
+                }
+                continueButtonRef.current!.focus();
+            }
+        }
+    };
+
+    useEffect(() => {
+        const input =
+            document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
+        if (input) {
+            input.focus();
+        }
+    }, []);
+
     function goForward() {
 
         if (exerciseToCreate !== undefined &&
             factObjectIndex < exerciseToCreate.factObjects.length - 1) {
             setFactObjectIndex(factObjectIndex + 1);
+            const input =
+                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
+            if (input) {
+                input.focus();
+            }
         }
     }
 
@@ -64,6 +99,11 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex !== 0) {
             setFactObjectIndex(factObjectIndex - 1)
+            const input =
+                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
+            if (input) {
+                input.focus();
+            }
         }
     }
 
@@ -135,7 +175,7 @@ export default function CreateExerciseForm({
                 <em><p>{exerciseToCreate?.factObjects[factObjectIndex].name}</p></em>
             </div>
             {
-                exerciseToCreate?.factObjects[factObjectIndex].facts.map((fact) => <div
+                exerciseToCreate?.factObjects[factObjectIndex].facts.map((fact, index) => <div
                     key={fact.factName}
                     className={styles.rightAnswersDiv}
                 >
@@ -146,9 +186,11 @@ export default function CreateExerciseForm({
                     </label>
                     <input
                         id={fact.factName}
+                        ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
                         type="text"
                         value={fact.factValue}
                         onChange={(event) => handleInputChange(event, fact.factName, factObjectIndex)}
+                        onKeyDown={(event) => handleInputKeyDown(event, index, factObjectIndex)}
                     />
                 </div>)
             }
@@ -162,6 +204,7 @@ export default function CreateExerciseForm({
                     Tillbaka
                 </button>
                 <button
+                    ref={continueButtonRef}
                     type="button"
                     className={styles.broadButton}
                     onClick={goForward}
@@ -175,6 +218,7 @@ export default function CreateExerciseForm({
                 crappyValidationEverythingHaveValues() && <div className={styles.sendAnswerDiv}>
                     <button
                         className="broadButton"
+                        ref={submitButtonRef}
                     >
                         Skapa övning
                     </button>

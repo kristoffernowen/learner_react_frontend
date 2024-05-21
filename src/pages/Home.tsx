@@ -2,6 +2,7 @@ import LearnerTable, {ColumnName, FunctionForLearnerTable} from "../components/g
 import {urls} from "../utilities/urls";
 import {useGetRecordsFor} from "../customHooks/useGetRecordsFor";
 import {useNavigate} from "react-router";
+import {useEffect} from "react";
 
 export type SelectExercise = {
     name: string,
@@ -16,6 +17,10 @@ const columnNames: ColumnName[] = [{
 export default function Home() {
 
     const [exercises, , loading, error] = useGetRecordsFor<SelectExercise>(urls.getExercises);
+
+    useEffect(() => {
+        console.log(exercises)
+    }, [exercises])
 
     const navigate = useNavigate();
 

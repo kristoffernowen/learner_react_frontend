@@ -11,12 +11,14 @@ type InputDivProps = {
 } & ComponentPropsWithoutRef<"input">
 
 export default function InputWithLabel({
-                                     label,
-                                     id,
-                                     value,
-                                     handleInputChange,
-                                     ...props
-                                 }: InputDivProps) {
+                                           label,
+                                           id,
+                                           value,
+                                           handleInputChange,
+                                           ...props
+                                       }: InputDivProps) {
+
+
 
     return <div
         className={styles.topDiv}
@@ -28,7 +30,6 @@ export default function InputWithLabel({
             {label}
         </label>
         <input
-
             {...props}
             className={styles.input}
             id={id}
