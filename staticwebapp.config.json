@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "route": "/"
+    },
+    {
+      "route": "/manage-exercise"
+    },
+    {
+      "route": "practice-page/:id"
+    },
+    {
+      "route": "/new-exercise"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  }
+}
+
