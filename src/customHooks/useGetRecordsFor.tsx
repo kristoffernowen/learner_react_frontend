@@ -8,7 +8,6 @@ export function useGetRecordsFor<T>(url: string): [T[], Dispatch<SetStateAction<
     useEffect(() => {
         async  function fetchData() {
             try {
-                console.log(url)
                 setLoading(true);
                 const response = await fetch(url, {
                     method: "GET",
