@@ -1,5 +1,5 @@
 import LearnerTable, {ColumnName} from "../components/general/table/LearnerTable";
-import {SelectExercise} from "./Home";
+import {SelectExercise} from "./ChooseExercise";
 import {type FunctionForLearnerTable} from "../components/general/table/LearnerTable";
 import {urls} from "../utilities/urls";
 import {useGetRecordsFor} from "../customHooks/useGetRecordsFor";
