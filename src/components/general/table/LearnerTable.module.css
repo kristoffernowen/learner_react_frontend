@@ -6,15 +6,15 @@
 
 .learnerTable {
     background-color: rgba(238,238,255, 0.4);
-    padding: 0.2rem 1rem;
+    padding: 0.2em 1em;
     border-radius: 8px;
-    border: solid 0.3rem lightpink;
+    border: solid 0.3em lightpink;
 }
 .learnerTable tr {
     border-radius: 8px;
 }
 .learnerTable td, th {
-    padding: 0.1rem 1rem;
+    padding: 0.1em 0.1em;
     border-radius: 8px;
 }
 .rightAnswer {
@@ -27,7 +27,8 @@
 .learnerTable button {
     background-color: lightgray;
 }
-
-.plainCell {
-
+@media screen and (min-width: 600px){
+    .learnerTable td, th {
+        padding: 0.1em 3em;
+    }
 }
