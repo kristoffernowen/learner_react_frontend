@@ -1,11 +1,13 @@
+.form {
+    max-width: 20em;
+}
+
 .exerciseDiv {
     border: solid 0.1rem darkgray;
     border-radius: 8px;
     background-color: lightpink;
     padding: 0.3rem;
     margin: 0.3rem;
-    max-width: 30rem;
-    width: 25rem;
     display: flex;
     justify-content: space-between;
 }
@@ -29,7 +31,6 @@
     background-color: lightpink;
     padding: 0.3rem;
     margin: 0.3rem;
-    max-width: 30rem;
     display: flex;
     justify-content: space-between;
 }
@@ -47,3 +48,9 @@
     margin: 5rem 0.3rem 0.3rem 0.3rem;
     max-width: 30rem;
 }
+ @media screen and (min-width: 600px){
+    .form {
+        max-width: 50em;
+        width: 30em;
+    }
+ }
