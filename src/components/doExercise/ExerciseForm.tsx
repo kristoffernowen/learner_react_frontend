@@ -172,7 +172,9 @@ export default function ExerciseForm({
         return <p>Laddar...</p>
     }
 
-    return <form onSubmit={handleSubmit}>
+    return <form
+        className={styles.form}
+        onSubmit={handleSubmit}>
         <div className={styles.titleDiv}>
             <strong><span>{answers.name}: </span></strong>
             <em><span>{answers.factObjects[factObjectIndex].name}</span></em>

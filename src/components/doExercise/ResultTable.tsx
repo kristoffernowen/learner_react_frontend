@@ -61,7 +61,6 @@ export default function ResultTable ({result}: ResultTableProps) {
                 countCorrectAnswer++ :
                 countIncorrectAnswer++);
     })
-    console.log(result)
     const tableData = [];
     for (let i = 0;i < result.perFactObjects.length; i++) {
         let factObjectName = result.perFactObjects[i].name;
