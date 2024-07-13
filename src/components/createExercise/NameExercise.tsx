@@ -46,7 +46,9 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
         }
     }
 
-    return <>
+    return <div
+        className={styles.container}
+    >
         <p>Namnge övningen.</p>
 
         <div
@@ -76,5 +78,5 @@ export default function NameExercise({modelExercise, setModelExercise, setStage}
             Gå vidare
         </button>
 
-    </>
+    </div>
 }

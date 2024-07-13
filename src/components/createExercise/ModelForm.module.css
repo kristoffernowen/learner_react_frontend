@@ -4,21 +4,20 @@
     margin: 0.3em 0;
 }
 
-.grayBox {
-    margin: 5rem;
-    background-color: red;
-}
-
 @media screen and (min-width: 1200px) {
     .form {
         display: flex;
         justify-content: space-between;
         width: 80%;
-        margin: 0 10%;
+        margin: 5% 10%;
     }
 
     .form .leftDiv {
-        min-width: 40rem;
-        margin: 5rem;
+        min-width: 40em;
+        margin: 0 5em;
+    }
+
+    .grayBoxP {
+        width: 25em;
     }
 }

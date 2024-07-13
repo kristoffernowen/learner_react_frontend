@@ -25,6 +25,7 @@ export default function CreateExercisePage() {
     const [stage, setStage] = useState<StageOfCreation>("nameOfExercise");
 
     return <>
+        <h1>Skapa övning</h1>
         {
             stage === "nameOfExercise" && <NameExercise
                 modelExercise={modelExercise}

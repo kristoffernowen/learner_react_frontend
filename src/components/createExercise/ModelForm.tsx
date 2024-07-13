@@ -44,7 +44,7 @@ export default function ModelForm({
 
     function Add(event: FormEvent) {
         event.preventDefault();
-        if(newFact.trim() === "")
+        if (newFact.trim() === "")
             return;
         setModelFactObject((prevState) => {
             if (prevState !== undefined) {
@@ -93,7 +93,7 @@ export default function ModelForm({
 
     function removeItem(factNameToRemove: string) {
         setModelFactObject((prevState?) => {
-                if(prevState !== undefined) {
+                if (prevState !== undefined) {
                     return {
                         ...prevState,
                         facts: prevState.facts.filter(fact => fact.factName !== factNameToRemove)
@@ -116,7 +116,8 @@ export default function ModelForm({
         <div
             className={styles.leftDiv}
         >
-            <p>Bygg upp vilka fakta (t ex vikt) som ska ingå i varje faktaobjekt (t ex tiger) i övningen (t ex djur). Lägg till vad faktan ska ha för namn.
+            <p>Bygg upp vilka fakta (t ex vikt) som ska ingå i varje faktaobjekt (t ex tiger) i övningen (t ex djur).
+                Lägg till vad faktan ska ha för namn.
                 Senare skriver du in vilket värde, eller rätt svar, varje fakta per faktaobjekt ska ha.</p>
             <InputWithLabel
                 label="namn på fakta"
@@ -138,13 +139,11 @@ export default function ModelForm({
                 Gå vidare
             </button>
         </div>
-        <GrayBorderedBox
-            className={styles.grayBox}
-        >
-            <p>Övningen kommer att innehålla följande fakta per objekt:</p>
+        <GrayBorderedBox>
+            <p className={styles.grayBoxP}>Övningen kommer att innehålla följande fakta per objekt:</p>
             <UlToAdd>
                 {modelFactObject.facts.length > 0 && modelFactObject.facts.map((fact) =>
-                    <LiToAdd name={fact.factName} key={fact.factName} removeItem={removeItem} />
+                    <LiToAdd name={fact.factName} key={fact.factName} removeItem={removeItem}/>
                 )}
             </UlToAdd>
         </GrayBorderedBox>
