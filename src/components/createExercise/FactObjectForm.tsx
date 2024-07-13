@@ -117,7 +117,9 @@ export default function FactObjectForm({
             </button>
         </div>
         <GrayBorderedBox>
-            <p>Övningen kommer att innehålla följande faktaobjekt:</p>
+            <p
+                className={styles.grayBoxP}
+            >Övningen kommer att innehålla följande faktaobjekt:</p>
             <UlToAdd>
                 {modelExercise.factObjects.length > 0 && modelExercise.factObjects.map((fact) =>
                     <LiToAdd key={fact.name} name={fact.name} removeItem={removeItem}/>
