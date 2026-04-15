@@ -6,7 +6,7 @@ type UrlCollection = {
     checkAnswers: string;
 }
 
-const baseUrl = "https://koffes-learner-api.azurewebsites.net/api/";
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export const urls: UrlCollection = {
     getExercises: `${baseUrl}Exercise/`,
