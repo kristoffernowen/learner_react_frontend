@@ -1,7 +1,7 @@
 import LearnerTable, {ColumnName, FunctionForLearnerTable} from "../components/general/table/LearnerTable";
 import {urls} from "../utilities/urls";
 import {useGetRecordsFor} from "../customHooks/useGetRecordsFor";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 
 export type SelectExercise = {
     name: string,

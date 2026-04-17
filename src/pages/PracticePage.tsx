@@ -1,4 +1,4 @@
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import {useState} from "react";
 import ExerciseForm from "../components/doExercise/ExerciseForm";
 import ResultTable from "../components/doExercise/ResultTable";

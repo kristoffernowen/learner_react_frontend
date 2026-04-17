@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {CreateExercise, CreateFactObject} from "./ModelForm";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import styles from "./CreateExerciseForm.module.css";
 import {urls} from "../../utilities/urls";
 import {post} from "../../utilities/fetchUtility";
