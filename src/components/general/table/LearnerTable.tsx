@@ -11,7 +11,7 @@ type LearnerTableProps = {
 
 type DataWithId = {
     id: string;
-    [key: string]: any;
+    [key: string]: string | number | boolean;
 }
 
 export type ColumnName = {

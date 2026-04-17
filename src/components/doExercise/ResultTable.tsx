@@ -63,9 +63,9 @@ export default function ResultTable ({result}: ResultTableProps) {
     })
     const tableData = [];
     for (let i = 0;i < result.perFactObjects.length; i++) {
-        let factObjectName = result.perFactObjects[i].name;
+        const factObjectName = result.perFactObjects[i].name;
         for(let j = 0; j < result.perFactObjects[i].perFacts.length; j++){
-            let newTableRow: ResultTableData = {
+            const newTableRow: ResultTableData = {
                 factObjectName: "",
                 id: "",
                 factName: "",

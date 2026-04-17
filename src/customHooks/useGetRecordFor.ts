@@ -24,7 +24,7 @@ export function useGetRecordFor<T>(url:string, initialData: T): [T, Dispatch<Set
             }
         }
         fetchData();
-    }, [])
+    }, [url])
 
     return [data, setData, loading, error];
 }

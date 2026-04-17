@@ -72,7 +72,7 @@ export default function ExerciseForm({
         if (checkAnswersRequest !== undefined) {
             post(postUrl, checkAnswersRequest)
         }
-    }, [checkAnswersRequest])
+    }, [checkAnswersRequest, postUrl, setResult]);
 
     function mapToCheckAnswersRequest(practiceExercise: PracticeExercise): CheckAnswersRequest {
         const answersPerFact: AnswerPerFact[] = [];
@@ -166,7 +166,7 @@ export default function ExerciseForm({
             input.focus();
         }
 
-    }, [factObjectIndex, answers.factObjects.length])
+    }, [factObjectIndex, answers.factObjects.length]);
 
     if (isLoading) {
         return <p>Laddar...</p>

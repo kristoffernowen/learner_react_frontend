@@ -34,6 +34,10 @@ export async function deleteWithFetch(url: string, id: string): Promise<boolean>
             });
             return response.ok;
 
-        } catch {}
-    return false;
+        } catch (error: unknown) {
+        if (import.meta.env.DEV) {
+            console.error("deleteWithFetch failed", { url, id, error });
+        }
+        return false;
+    }
 }

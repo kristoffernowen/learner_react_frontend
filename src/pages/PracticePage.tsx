@@ -56,7 +56,7 @@ export type factResult = {
 
 export default function PracticePage() {
 
-    let {id} = useParams();
+    const {id} = useParams();
 
     const [factObjectIndex, setFactObjectIndex] = useState(0);
     const [checkAnswersRequest, setCheckAnswersRequest] = useState<CheckAnswersRequest | undefined>();

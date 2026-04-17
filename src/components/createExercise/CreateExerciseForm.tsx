@@ -75,11 +75,7 @@ export default function CreateExerciseForm({
     };
 
     useEffect(() => {
-        const input =
-            document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-        if (input) {
-            input.focus();
-        }
+       setFocusToFirstInput();
     }, []);
 
     function goForward() {
@@ -87,11 +83,7 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex < exerciseToCreate.factObjects.length - 1) {
             setFactObjectIndex(factObjectIndex + 1);
-            const input =
-                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-            if (input) {
-                input.focus();
-            }
+            setFocusToFirstInput();
         }
     }
 
@@ -99,11 +91,14 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex !== 0) {
             setFactObjectIndex(factObjectIndex - 1)
-            const input =
-                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-            if (input) {
-                input.focus();
-            }
+            setFocusToFirstInput();
+        }
+    }
+
+    function setFocusToFirstInput(){
+        const input = inputRefs.current[0];
+        if (input) {
+            input.focus();
         }
     }
 
