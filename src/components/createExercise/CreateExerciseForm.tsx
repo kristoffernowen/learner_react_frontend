@@ -56,6 +56,13 @@ export default function CreateExerciseForm({
     const submitButtonRef = useRef<HTMLButtonElement | null>(null);
     const continueButtonRef = useRef<HTMLButtonElement | null>(null);
 
+    const setFocusToFirstInput = () => {
+        const input = inputRefs.current[0];
+        if (input) {
+            input.focus();
+        }
+    }
+
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number, factObjectIndex: number) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -92,13 +99,6 @@ export default function CreateExerciseForm({
             factObjectIndex !== 0) {
             setFactObjectIndex(factObjectIndex - 1)
             setFocusToFirstInput();
-        }
-    }
-
-    function setFocusToFirstInput(){
-        const input = inputRefs.current[0];
-        if (input) {
-            input.focus();
         }
     }
 
@@ -183,7 +183,11 @@ export default function CreateExerciseForm({
                     </label>
                     <input
                         id={fact.factName}
-                        ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
+                        ref={(element) => {
+                            if (element) {
+                                inputRefs.current[index] = element
+                            }
+                        }} // array is populated and use push by ref function
                         type="text"
                         value={fact.factValue}
                         onChange={(event) => handleInputChange(event, fact.factName, factObjectIndex)}

@@ -166,7 +166,7 @@ export default function ExerciseForm({
             input.focus();
         }
 
-    }, [factObjectIndex, answers.factObjects.length]);
+    }, [factObjectIndex, answers]);
 
     if (isLoading) {
         return <p>Laddar...</p>
@@ -191,7 +191,11 @@ export default function ExerciseForm({
                     {fact.factName}
                 </label>
                 <input
-                    ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
+                    ref={(element) => {
+                        if (element) {
+                            inputRefs.current[index] = element
+                        }
+                    }} // array is populated and use push by ref function
                     id={fact.factName}
                     type="text"
                     className={styles.formInput}

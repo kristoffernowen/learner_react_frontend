@@ -1,6 +1,6 @@
 
 import validateTableDataAndColumns from "../../../functions/validateTableDataAndColumns";
-import {ReactNode, useEffect, useState} from "react";
+import {ReactNode} from "react";
 import styles from "./LearnerTable.module.css"
 
 type LearnerTableProps = {
@@ -31,16 +31,7 @@ export type FunctionForLearnerTable = {
 }
 
 export default function LearnerTable({data, columnNames, buttonFunctions}: LearnerTableProps) {
-
-    const [tableInputIsValid, setTableInputIsValid] = useState(true);
-
-    useEffect(() => {
-        const isValid = validateTableDataAndColumns(data, columnNames);
-        if(!isValid && data.length !== 0) {
-            console.log("bad table data");
-            setTableInputIsValid(false);
-        }
-    }, [data, columnNames])
+    const tableInputIsValid = data.length === 0 || validateTableDataAndColumns(data, columnNames);
 
     function htmlTdWithProperStyling(columnName: ColumnName, rowData: DataWithId, columnIndex: number): ReactNode {
         if(columnName.propName === "givenAnswer"){
