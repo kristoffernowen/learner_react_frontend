@@ -72,7 +72,7 @@ export default function ExerciseForm({
         if (checkAnswersRequest !== undefined) {
             post(postUrl, checkAnswersRequest)
         }
-    }, [checkAnswersRequest])
+    }, [checkAnswersRequest, postUrl, setResult]);
 
     function mapToCheckAnswersRequest(practiceExercise: PracticeExercise): CheckAnswersRequest {
         const answersPerFact: AnswerPerFact[] = [];
@@ -158,6 +158,13 @@ export default function ExerciseForm({
         }
     }
 
+// Focus first input when component mounts and when factObjectIndex changes
+// Lint want to include answers in dependency array but that causes focus to be lost when user types in input,
+// so I ignore that warning for now, but it would be good to find a better solution in the future. 
+// Maybe by using a separate state that only holds the fact names for the current fact object and then use that
+//  state in the dependency array instead of the whole answers object.
+
+
     useEffect(() => {
         if (answers.factObjects.length === 0) return;
         const input = document.querySelector(`#${answers.factObjects[factObjectIndex].facts[0].factName}`
@@ -166,7 +173,7 @@ export default function ExerciseForm({
             input.focus();
         }
 
-    }, [factObjectIndex, answers.factObjects.length])
+    }, [factObjectIndex]);
 
     if (isLoading) {
         return <p>Laddar...</p>
@@ -191,7 +198,11 @@ export default function ExerciseForm({
                     {fact.factName}
                 </label>
                 <input
-                    ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
+                    ref={(element) => {
+                        if (element) {
+                            inputRefs.current[index] = element
+                        }
+                    }} // array is populated and use push by ref function
                     id={fact.factName}
                     type="text"
                     className={styles.formInput}

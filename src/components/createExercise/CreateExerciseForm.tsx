@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useEffect, useRef, useState} from "react";
 import {CreateExercise, CreateFactObject} from "./ModelForm";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import styles from "./CreateExerciseForm.module.css";
 import {urls} from "../../utilities/urls";
 import {post} from "../../utilities/fetchUtility";
@@ -56,6 +56,13 @@ export default function CreateExerciseForm({
     const submitButtonRef = useRef<HTMLButtonElement | null>(null);
     const continueButtonRef = useRef<HTMLButtonElement | null>(null);
 
+    const setFocusToFirstInput = () => {
+        const input = inputRefs.current[0];
+        if (input) {
+            input.focus();
+        }
+    }
+
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number, factObjectIndex: number) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -75,11 +82,7 @@ export default function CreateExerciseForm({
     };
 
     useEffect(() => {
-        const input =
-            document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-        if (input) {
-            input.focus();
-        }
+       setFocusToFirstInput();
     }, []);
 
     function goForward() {
@@ -87,11 +90,7 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex < exerciseToCreate.factObjects.length - 1) {
             setFactObjectIndex(factObjectIndex + 1);
-            const input =
-                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-            if (input) {
-                input.focus();
-            }
+            setFocusToFirstInput();
         }
     }
 
@@ -99,11 +98,7 @@ export default function CreateExerciseForm({
         if (exerciseToCreate !== undefined &&
             factObjectIndex !== 0) {
             setFactObjectIndex(factObjectIndex - 1)
-            const input =
-                document.getElementById(`${exerciseToCreate?.factObjects[factObjectIndex].facts[0].factName}`) as HTMLInputElement | null;
-            if (input) {
-                input.focus();
-            }
+            setFocusToFirstInput();
         }
     }
 
@@ -188,7 +183,11 @@ export default function CreateExerciseForm({
                     </label>
                     <input
                         id={fact.factName}
-                        ref={(element) => element && (inputRefs.current[index] = element)} // array is populated and use push by ref function
+                        ref={(element) => {
+                            if (element) {
+                                inputRefs.current[index] = element
+                            }
+                        }} // array is populated and use push by ref function
                         type="text"
                         value={fact.factValue}
                         onChange={(event) => handleInputChange(event, fact.factName, factObjectIndex)}

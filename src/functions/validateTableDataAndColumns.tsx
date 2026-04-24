@@ -1,6 +1,7 @@
 import {ColumnName} from "../components/general/table/LearnerTable";
 
-export default function validateTableDataAndColumns(data: any[], columnNames: ColumnName[]): boolean {
+export default function validateTableDataAndColumns(data: { [key: string]: string | number | boolean }[], 
+    columnNames: ColumnName[]): boolean {
 
     const dataProperties = data.reduce<string[]>((accumulator, currentElement) => {
         Object.keys(currentElement).forEach(key => {

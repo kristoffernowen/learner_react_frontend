@@ -1,4 +1,4 @@
-import {useParams} from "react-router";
+import {useParams} from "react-router-dom";
 import {useState} from "react";
 import ExerciseForm from "../components/doExercise/ExerciseForm";
 import ResultTable from "../components/doExercise/ResultTable";
@@ -56,7 +56,7 @@ export type factResult = {
 
 export default function PracticePage() {
 
-    let {id} = useParams();
+    const {id} = useParams();
 
     const [factObjectIndex, setFactObjectIndex] = useState(0);
     const [checkAnswersRequest, setCheckAnswersRequest] = useState<CheckAnswersRequest | undefined>();
