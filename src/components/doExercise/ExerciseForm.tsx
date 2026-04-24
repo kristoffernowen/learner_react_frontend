@@ -158,6 +158,13 @@ export default function ExerciseForm({
         }
     }
 
+// Focus first input when component mounts and when factObjectIndex changes
+// Lint want to include answers in dependency array but that causes focus to be lost when user types in input,
+// so I ignore that warning for now, but it would be good to find a better solution in the future. 
+// Maybe by using a separate state that only holds the fact names for the current fact object and then use that
+//  state in the dependency array instead of the whole answers object.
+
+
     useEffect(() => {
         if (answers.factObjects.length === 0) return;
         const input = document.querySelector(`#${answers.factObjects[factObjectIndex].facts[0].factName}`
@@ -166,7 +173,7 @@ export default function ExerciseForm({
             input.focus();
         }
 
-    }, [factObjectIndex, answers]);
+    }, [factObjectIndex]);
 
     if (isLoading) {
         return <p>Laddar...</p>
