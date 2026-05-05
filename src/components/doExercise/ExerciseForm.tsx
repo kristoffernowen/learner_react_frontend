@@ -75,7 +75,7 @@ export default function ExerciseForm({
             const data = checkColdstartAnswers(checkAnswersRequest);
             setResult(data);
         }
-    }, [checkAnswersRequest, postUrl, setResult, id]);
+    }, [checkAnswersRequest, postUrl, setResult]);
 
     function mapToCheckAnswersRequest(practiceExercise: PracticeExercise): CheckAnswersRequest {
         const answersPerFact: AnswerPerFact[] = [];
