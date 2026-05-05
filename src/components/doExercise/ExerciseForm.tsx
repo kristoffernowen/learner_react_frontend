@@ -5,6 +5,7 @@ import styles from "./ExerciseForm.module.css";
 import {useGetRecordFor} from "../../customHooks/useGetRecordFor";
 import {urls} from "../../utilities/urls";
 import {Result} from "./ResultTable";
+import { checkColdstartAnswers } from "../../utilities/coldstartDemo";
 
 type ExerciseFormProps = {
     id: string | undefined;
@@ -27,13 +28,12 @@ export default function ExerciseForm({
     const getUrl: string = urls.startExercise;
     const postUrl: string = urls.checkAnswers;
     const [answers, setAnswers, isLoading] = useGetRecordFor<PracticeExercise>(
-        `${getUrl}${id}`,
-        {
+        `${getUrl}${id}`, {
             name: "",
             factObjects: [],
             id: ""
-        });
-
+        }
+        );
     const inputRefs = useRef<HTMLInputElement[]>([]);
     const submitButtonRef = useRef<HTMLButtonElement | null>(null);
     const continueButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -68,11 +68,14 @@ export default function ExerciseForm({
             const data = await response.json();
             setResult(data);
         }
-
-        if (checkAnswersRequest !== undefined) {
+        if (checkAnswersRequest !== undefined && !id?.endsWith("demo-123")) {
             post(postUrl, checkAnswersRequest)
+        } else if(checkAnswersRequest !== undefined && id?.endsWith("demo-123")) {
+            console.log("Not posting answers because id ends with /demo-123 and signals api is not ready");
+            const data = checkColdstartAnswers(checkAnswersRequest);
+            setResult(data);
         }
-    }, [checkAnswersRequest, postUrl, setResult]);
+    }, [checkAnswersRequest, postUrl, setResult, id]);
 
     function mapToCheckAnswersRequest(practiceExercise: PracticeExercise): CheckAnswersRequest {
         const answersPerFact: AnswerPerFact[] = [];
@@ -105,8 +108,8 @@ export default function ExerciseForm({
             });
         }
         setFactIndex(prevState => prevState + 1);
-        const input = document.querySelector(`#${answers?.factObjects[factObjectIndex].facts[factIndex].factName}`
-        ) as HTMLInputElement | null;
+        const factName = answers?.factObjects[factObjectIndex].facts[factIndex].factName;
+        const input = factName ? document.getElementById(factName) as HTMLInputElement | null : null;
         if (input) {
             input.focus();
         }
@@ -167,7 +170,7 @@ export default function ExerciseForm({
 
     useEffect(() => {
         if (answers.factObjects.length === 0) return;
-        const input = document.querySelector(`#${answers.factObjects[factObjectIndex].facts[0].factName}`
+        const input = document.getElementById(`${answers.factObjects[factObjectIndex].facts[0].factName}`
         ) as HTMLInputElement | null;
         if (input) {
             input.focus();

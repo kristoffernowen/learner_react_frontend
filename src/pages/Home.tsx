@@ -1,5 +1,15 @@
-export default function Home() {
+import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useApiStatus } from '../context/ApiStatusContext';
 
+export default function Home() {
+    const navigate = useNavigate();
+    const apiReady = useApiStatus();
+    useEffect(() => {
+        if(!apiReady){
+            navigate(`/practice-page/demo-123`)
+        }
+    }, [apiReady, navigate]);
 
     return (
         <>
