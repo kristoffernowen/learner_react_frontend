@@ -6,8 +6,7 @@ import ManageExercisesPage from "./pages/ManageExercisesPage";
 import PracticePage from "./pages/PracticePage";
 import CreateExercisePage from "./pages/CreateExercisePage";
 import ChooseExercise from "./pages/ChooseExercise";
-import {urls} from "./utilities/urls";
-import {useEffect} from "react";
+import { ApiStatusProvider } from './context/ApiStatusContext';
 
 const router = createBrowserRouter([
     {path: "/", element: <RootLayoutPage />, children: [
@@ -19,28 +18,11 @@ const router = createBrowserRouter([
         ]}
 ])
 
-const wakeUpApi = async () => {
-    try{
-        const response = await fetch(urls.getExercises);
-        if(!response.ok){
-            console.error("Api wakeup call. The first is expected to fail.", response.statusText)
-        }
-    } catch (error: unknown) {
-        if(error instanceof Error){
-            console.error("An unexpected error occurred", error.message);
-        } else {
-            console.error("An unexpected error occurred");
-        }
-    }
-};
-
 function App() {
-
-    useEffect(() => {
-        wakeUpApi();
-    }, []);
   return (
-    <RouterProvider router={router} />
+    <ApiStatusProvider>
+        <RouterProvider router={router} />
+    </ApiStatusProvider>
   )
 }
 
